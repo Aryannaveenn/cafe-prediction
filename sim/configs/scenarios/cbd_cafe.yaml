@@ -1,0 +1,25 @@
+# A busy city-centre cafe, built on top of base.yaml.
+extends: ../base.yaml
+
+name: cbd_cafe
+
+# Lots of office workers, so more customers overall.
+base_hourly_rate: 65
+
+# Very busy on weekdays, quiet on weekends when offices are empty.
+weekday_multipliers: [1.05, 1.10, 1.10, 1.10, 1.00, 0.45, 0.30]
+
+# A sharper morning commuter rush, and closing earlier in the afternoon.
+hourly_profile:
+  6: 0.60
+  7: 1.10
+  8: 1.00
+  9: 0.65
+  10: 0.45
+  11: 0.50
+  12: 0.85
+  13: 0.60
+  14: 0.30
+
+# Office workers are away on public holidays, so holidays are very quiet.
+holiday_multiplier: 0.35

@@ -1,0 +1,61 @@
+# ============================================================
+# BASE SCENARIO
+# Every number that shapes the simulated cafe lives here,
+# so you can change the cafe without touching any Python.
+# ============================================================
+
+# A label for this scenario. Used to name the output folders.
+name: base
+
+# The "master" random seed. Same seed = exactly the same data
+# every time, which makes experiments repeatable.
+seed: 42
+
+# The first simulated day, and how many days to simulate.
+# 730 days = two years.
+start_date: 2024-01-01
+days: 730
+
+# Where the cafe is. Only used to look up public holidays.
+# Change these to match the location you want to simulate.
+country: AU
+subdivision: NSW
+
+# The average number of customers per hour, for an hour whose
+# profile value (below) is 1.0, on an ordinary day.
+base_hourly_rate: 40
+
+# How busy each hour is, relative to the base rate.
+# 1.0 = the base rate, 0.5 = half as busy, and so on.
+# Any hour NOT listed here is treated as closed.
+hourly_profile:
+  6: 0.45    # 6am: opening, early commuters
+  7: 0.95    # 7am: morning rush builds
+  8: 1.00    # 8am: peak of the rush
+  9: 0.80
+  10: 0.60
+  11: 0.55
+  12: 0.75   # lunch bump
+  13: 0.65
+  14: 0.40
+  15: 0.25   # last hour before closing
+
+# How busy each day of the week is, Monday first, Sunday last.
+weekday_multipliers: [1.00, 1.00, 1.02, 1.05, 1.10, 0.85, 0.70]
+
+# On public holidays, demand is multiplied by this.
+# 0.55 means holidays are 45% quieter than a normal day.
+holiday_multiplier: 0.55
+
+# A smooth yearly cycle. 0.08 means demand rises and falls
+# by up to 8% over the year, peaking on this day of the year.
+seasonal_amplitude: 0.08
+seasonal_peak_day: 300
+
+# Long-term growth. 0.03 means the cafe grows 3% per year.
+trend_per_year: 0.03
+
+# Random day-to-day swings that nothing above explains
+# (a nearby office event, a bus delay, pure luck).
+# 0.10 means a typical day lands within about 10% of expected.
+daily_noise_sd: 0.10
